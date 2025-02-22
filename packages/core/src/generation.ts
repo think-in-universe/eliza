@@ -2219,6 +2219,8 @@ export async function handleProvider(
             return await handleDeepSeek(options);
         case ModelProviderName.LIVEPEER:
             return await handleLivepeer(options);
+        case ModelProviderName.NEARAI:
+            return await handleNearAi(options);
         default: {
             const errorMessage = `Unsupported provider: ${provider}`;
             elizaLogger.error(errorMessage);
@@ -2559,6 +2561,32 @@ async function handleLivepeer({
 
     return await aiGenerateObject({
         model: livepeerClient.languageModel(model),
+        schema,
+        schemaName,
+        schemaDescription,
+        mode,
+        ...modelOptions,
+    });
+}
+
+/**
+ * Handles object generation for NEAR AI models.
+ *
+ * @param {ProviderOptions} options - Options specific to NEAR AI.
+ * @returns {Promise<GenerateObjectResult<unknown>>} - A promise that resolves to generated objects.
+ */
+async function handleNearAi({
+    model,
+    apiKey,
+    schema,
+    schemaName,
+    schemaDescription,
+    mode = "json",
+    modelOptions,
+}: ProviderOptions): Promise<GenerateObjectResult<unknown>> {
+    const nearai = createOpenAI({ apiKey, baseURL: models.nearai.endpoint });
+    return await aiGenerateObject({
+        model: nearai.languageModel(model),
         schema,
         schemaName,
         schemaDescription,
