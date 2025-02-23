@@ -1,6 +1,6 @@
 {
-	"name": "@elizaos/core",
-	"version": "0.1.9",
+	"name": "@near-agent/elizaos-core",
+	"version": "0.1.9-patch.2",
 	"description": "",
 	"type": "module",
 	"main": "dist/index.js",
