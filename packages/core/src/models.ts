@@ -1184,6 +1184,9 @@ export const models: Models = {
                 maxOutputTokens: 8192,
                 temperature: 0.6,
             },
+            [ModelClass.IMAGE]: {
+                name: settings.IMAGE_NEARAI_MODEL || "fireworks::accounts/fireworks/models/playground-v2-5-1024px-aesthetic",
+            },
         },
     },
 };
